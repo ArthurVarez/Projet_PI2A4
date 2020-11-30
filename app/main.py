@@ -14,13 +14,40 @@ from flask_restplus import Api , Resource
 flask_app = Flask(__name__)
 app = Api(app=flask_app,
           title='APIs Documentation',
-          description=""
+          description="Here we are defining our endpoints of the API"
           )
+
+
+
+name_space = app.namespace('Calender', 
+                           description='Requests to interact with the calender'
+                           )
+
+
+@name_space.route('/Calender')
+
+# requests for the calender -> get, modify ....
+class Calender(Resource):
+    
+    #Here we have our requests
+    def get(self):
+        pass
+    def post(self):
+        pass
+    def put(self):
+        pass
+    def delete(self):
+        pass
+
+
+
 
 name_space = app.namespace('User', description='')
 
 
 @name_space.route('/User')
+
+# requests to manage users and login/logout
 
 
 class User(Resource):
@@ -34,18 +61,13 @@ class User(Resource):
         pass
     def delete(self):
         pass
-@name_space.route('/')
-
-class User2(Resource):
-    def get():
-        pass
-    
-
 
     
 name_space = app.namespace('Admin', description='')
 @name_space.route('/Admin')
 class Admin(Resource):
+# requests the manage admin accounts and login/logout
+
     
       #Here we have our requests
     def get(self):
@@ -60,10 +82,6 @@ class Admin(Resource):
 
 
 
-"""@flask_app.route("/hello")
-def Hello():
-    return "<h1> Hello <h1>"
-"""
     
 if __name__=="__main__":
    flask_app.run(host="0.0.0.0",port = 80)
