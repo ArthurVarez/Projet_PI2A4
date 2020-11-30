@@ -1,0 +1,30 @@
+Endpoints : 
+
+User:
+
+POST creer un nouveau user
+PUT mise a jour des données user
+DELETE delete user
+GET get an user
+GET user/login log into the system
+GET user/logout log out current loged session of the user
+
+
+Admin:
+
+POST creer un nouveau Admin
+PUT mise a jour des données Admin
+DELETE delete Admin
+GET get an Admin
+GET user/login log into the system
+GET user/logout log out current loged session of the Admin
+
+Calender : 
+
+POST add a new calender
+PUT Update the calender
+GET find a slot
+
+
+
+
