@@ -1,0 +1,8 @@
+version : "3"
+  services:
+    flaskapp:
+      build:
+        context: "./app"
+        dockerfile : "Dockerfile"
+      image : "flaskapp:latest"
+      
