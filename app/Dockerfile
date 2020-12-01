@@ -1,7 +1,7 @@
 FROM python:latest
 
-pip install flask
-pip install flask_restplus
+RUN pip install flask
+RUN pip install flask_restplus
 
 ADD main.py .
 
