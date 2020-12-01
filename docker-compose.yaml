@@ -5,6 +5,7 @@ services:
       context: "./app"
       dockerfile : "Dockerfile"
     image : "flaskapp:latest"
-    ports : "80"
+    ports : 
+      - "80"
     restart : "on-failure"
 
