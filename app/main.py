@@ -10,8 +10,9 @@ import werkzeug
 werkzeug.cached_property = werkzeug.utils.cached_property
 from flask import Flask,request
 from flask_restplus import Api , Resource
+import MySQLdb
 
-
+DB = MySQLdb.connect('Calender', user='root',password=None)
 flask_app = Flask(__name__)
 flask_app.config["DEBUG"]=True
 app = Api(app=flask_app,
@@ -38,9 +39,14 @@ class Calender(Resource):
     
     #Here we have our requests
     def get(self):
-        pass
+        cur = MySQLdb.cursors()
+        rep = cur.execute("SELECT * FROM YOUR_TABLE_NAME")
+        return rep 
+        
     def post(self):
+        
         pass
+    
     def put(self):
         pass
     def delete(self):
@@ -49,7 +55,7 @@ class Calender(Resource):
 
 
 
-name_space = app.namespace('User', description='')
+"""name_space = app.namespace('User', description='')
 
 
 @name_space.route('/User')
@@ -109,11 +115,11 @@ class LogOutAdmin(Resource):
     def get(self, username):
         return "disconnect",200
         
-    
+"""    
 
 
 
     
 if __name__=="__main__":
-   flask_app.run(host="0.0.0.0",port = 80)
+   flask_app.run(host='0.0.0.0',port=80)
 

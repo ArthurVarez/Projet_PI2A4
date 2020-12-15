@@ -1,8 +1,0 @@
-services:
-  - docker
-before_script:
-  - docker-compose up -d --build
-script:
-  - docker-compose exec flaskapp python main.py
-after_script:
-  - docker-compose down --volumes

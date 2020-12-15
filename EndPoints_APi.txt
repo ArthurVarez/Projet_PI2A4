@@ -19,7 +19,7 @@ GET get an Admin
 GET user/login log into the system
 GET user/logout log out current loged session of the Admin
 
-Calender : 
+Calender:
 
 POST add a new calender
 PUT Update the calender
