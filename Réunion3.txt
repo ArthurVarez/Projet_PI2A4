@@ -1,0 +1,9 @@
+1.Implémenter l'API
+2.Déplacer les serveurs Sql sur docker :
+  Dockerfile : 
+           ->créer l'image Docker 
+  Docker compose : 
+           ->lancer l'image docker 
+           ->lancer un serveur MySql
+           ->lancer Adminer
+3.Implémenter JWT
