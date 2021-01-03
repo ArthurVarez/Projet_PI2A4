@@ -1,2 +1,4 @@
+To create a random secret key using node :
+$require('crypto').randomBytes(64).toString('hex')
+
 ACCESS_TOKEN_SECRET=845fec0b28a5c24ddb5a706cf73fde21583f6ddadf14bb213fed703b8c8dbe6aa8758fc6923e2c39f489564078c62a9424f8d5de79f075a903e86d9e50a750bf
-REFRESH_TOKEN_SECRET=ac2cfac26e97911dbfa39a69d3f504c37532598648b143e5db4cb0f34fa61d4e5ecc8c602b9eb23d9a1165cf5abe52435f0580195ab334fa36f7944cd07ed2bd
