@@ -1,0 +1,25 @@
+version: '3'
+services: 
+    db:
+        # This is the configution for the first service
+        image: "mysql:5.7"
+        # ici on pull l'image mysql du dockerhub
+        # restart: "always"
+        environment: 
+            MYSQL_ROOT_PASSWORD: "password"
+            MYSQL_DATABASE: "adminer"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "password"
+        volumes:
+          - db_data:/var/lib/mysql
+            
+    adminer:
+        # This is the configuration for the other service
+        image: "adminer:latest"
+        # ici on pull l'image adminer du dockerhub
+        # Let's mapp adminer to the outside world (host->3333 et conteneur->8080)
+        ports:
+         - "3333:8080"
+
+volumes:
+  db_data: {}
