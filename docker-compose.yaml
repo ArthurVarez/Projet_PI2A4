@@ -14,19 +14,20 @@ services:
           - db_data:/var/lib/mysql
             
     adminer:
-        # This is the configuration for the other service
-        image: "adminer:latest"
-        # ici on pull l'image adminer du dockerhub
-        # Let's mapp adminer to the outside world (host->3333 et conteneur->8080)
+        image: adminer
+        restart: always
         ports:
-         - "3333:5000"
+            - "8081:8080"
+
     flaskapp:
         build : ./app
-        restart: always
-        ports : 
+        ports:
             - "5000:5000"
-        depends_on : 
-            - db
+        
+
+
+
+    
 
 volumes:
   db_data: {}

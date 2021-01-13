@@ -10,7 +10,7 @@ COPY . /app
 
 ENV FLASK_APP=app.py
 
-EXPOSE 5050 
+EXPOSE 5000
 
 
-CMD ["python","app.py","runserver","--host=0.0.0.0","--threaded"]
+CMD ["python","app.py"]
