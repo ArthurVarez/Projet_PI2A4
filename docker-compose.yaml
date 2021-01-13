@@ -19,12 +19,14 @@ services:
         # ici on pull l'image adminer du dockerhub
         # Let's mapp adminer to the outside world (host->3333 et conteneur->8080)
         ports:
-         - "3333:8080"
+         - "3333:5000"
     flaskapp:
-        build : /app
+        build : ./app
         restart: always
-        port : "5000:5000"
-        depends_on : db
+        ports : 
+            - "5000:5000"
+        depends_on : 
+            - db
 
 volumes:
   db_data: {}
