@@ -13,4 +13,4 @@ ENV FLASK_APP=app.py
 EXPOSE 5050 
 
 
-CMD ["python","app.py"]
+CMD ["python","app.py","runserver","--host=0.0.0.0","--threaded"]

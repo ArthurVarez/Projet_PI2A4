@@ -3,12 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 
 app = Flask(__name__)
-connection= create_engine()
+engine = create_engine('mysql+mysqldb://user:password@0.0.0.0/adminer')    
+connnect = engine.connect()
+
+
 
 @app.route("/")
 
 def hello():
     return '<h1> Hello <h1>'
 
+@appr.route()
+
+
 if __name__ == '__main__':
-    app.run(port=5050, debug=True)
+    app.run(host=0.0.0.0,port=5000, debug=True)
