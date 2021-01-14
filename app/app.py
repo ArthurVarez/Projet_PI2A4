@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
-
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, MetaData,Column,Integer,Table,select
+from sqlalchemy import create_engine, MetaData,Column,Integer,Table,select,String,DateTime
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
+Bootstrap(app)
 
 
 engine = create_engine('mysql+pymysql://root:password@db/API_DB')
@@ -47,10 +48,38 @@ ressources = Table(
 
 )
 
+reservation = Table(
+    'Reservation',
+    metadata,
+    Column('id',Integer, primary_key=True),
+    Column("nomUtilisateur",String),
+    Column("date_debut",DateTime),
+    Column("date_fin",DateTime)
+    
+)
+ressource_reserve = Table(
+    'RessourceReserve',
+    metadata,
+    Column('idRessource',Integer, primary_key=True),
+    Column('idReservation',Integer, primary_key=True),
+    Column("nbGPU",Integer),
+    Column("nbmemoire",Integer)
+    
+)
+
+
+
 
 #msqldb_uri = 'mysql+mysql://user:password@localhost:3309/adminer'
 #engine = create_engine(msqldb_uri)
  
+
+@app.route("/",methods=["GET"])
+
+def Hello():
+    
+    return render_template('welcome.html')
+
 
 
 @app.route("/Ressource/",methods=["GET","POST"])
