@@ -7,7 +7,7 @@ services:
         # restart: "always"
         environment: 
             MYSQL_ROOT_PASSWORD: "password"
-            MYSQL_DATABASE: "adminer"
+            MYSQL_DATABASE: "API_DB"
             MYSQL_USER: "user"
             MYSQL_PASSWORD: "password"
         volumes:

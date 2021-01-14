@@ -1,11 +1,26 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, Column, Integer,String,DateTime
+from sqlalchemy.orm import sessionmaker,scoped_session
+from sqlalchemy.ext.declarative import declarative_base
 
 app = Flask(__name__)
-#msqldb_uri = 'mysql+mysql://user:password@localhost:3309/adminer'
-#engine = create_engine(msqldb_uri)
- 
+
+engine = create_engine('mysql+pymysql://root:password@localhost:3306/API_DB')
+Session = sessionmaker(bind=engine,future=True)
+Base= declarative_base()
+
+class Reservation(Base):
+    __tablename__ = 'Reservation'
+
+    id = Column(Integer, primary_key=True)
+    nomUtilisateur = Column(String(20))
+    date_debut = Column(DateTime)
+    date_fin = Column(DateTime)
+
+
+
+
 
 
 
