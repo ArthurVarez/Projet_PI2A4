@@ -96,9 +96,7 @@ def RessourceReserve_idRessource(): #retourne la liste des reservations d'une re
 @app.route("/RessourceReserve/idReservation/<idReservation>", methods=["GET"])
 def RessourceReserve_idReservation():#retourne la liste des ressource d'une réservation spécifié
     pass
-=======
 
->>>>>>> Stashed changes
 
 
 if __name__ == '__main__':
