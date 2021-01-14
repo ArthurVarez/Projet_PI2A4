@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 
 app = Flask(__name__)
-<<<<<<< Updated upstream
+
 
 engine = create_engine('mysql+pymysql://root:password@localhost:3306/API_DB')
 Session = sessionmaker(bind=engine)
@@ -47,11 +47,11 @@ ressources = Table(
 
 )
 
-=======
+
 #msqldb_uri = 'mysql+mysql://user:password@localhost:3309/adminer'
 #engine = create_engine(msqldb_uri)
  
->>>>>>> Stashed changes
+
 
 @app.route("/Ressource/",methods=["GET","POST"])
 def Ressources():
@@ -84,7 +84,7 @@ def Reservation():
 def Reservation_ID(): #renvoie la réservation avec l'ID correspondant
     pass
 
-<<<<<<< Updated upstream
+
 @app.route("/RessourceReserve/", methods=["GET"])
 def RessourceReserve(): #retourne la liste de toutes les ressouces réservé de tout les temps(admin?)
     pass
