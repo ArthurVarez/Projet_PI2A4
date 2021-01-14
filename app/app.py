@@ -3,8 +3,9 @@ from flask import Flask
 #from sqlalchemy import create_engine
 
 app = Flask(__name__)
-#engine = create_engine('mysql+mysqldb://user:password@0.0.0.0/adminer')    
-#connnect = engine.connect()
+ msqldb_uri = 'mysql+mysql://user:password@localhost:3309/adminer'
+ engine = create_engine(msqldb_uri)
+ 
 
 
 
