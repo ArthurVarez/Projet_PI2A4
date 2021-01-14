@@ -2,14 +2,14 @@ from flask import Flask
 from flask import request
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData,Column,Integer,Table,select
+from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
 
 
-engine = create_engine('mysql+pymysql://root:password@localhost:3306/API_DB')
+engine = create_engine('mysql+pymysql://root:password@db/API_DB')
 Session = sessionmaker(bind=engine)
-Base= declarative_base()
 metadata= MetaData()
 """
 class Reservation(Base):
