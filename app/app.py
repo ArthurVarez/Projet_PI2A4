@@ -18,6 +18,21 @@ class Reservation(Base):
     date_debut = Column(DateTime)
     date_fin = Column(DateTime)
 
+class Ressource(Base):
+    __tablename__ = 'Ressource'
+
+    id = Column(Integer, primary_key=True)
+    quantiteMemoire = Column(Integer)
+    quantiteGPU = Column(Integer)
+
+class RessourceReserve(Base):
+    __tablename__ = 'RessourceReserve'
+
+    idRessource = Column(Integer, primary_key=True)
+    idReservation = Column(Integer, primary_key=True)
+    nbGPU = Column(Integer)
+    nbmemoire = Column(Integer)
+
 
 
 
