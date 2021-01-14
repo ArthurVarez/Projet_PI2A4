@@ -1,10 +1,10 @@
 from flask import Flask
-#from flask_sqlalchemy import SQLAlchemy
-#from sqlalchemy import create_engine
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 
 app = Flask(__name__)
- msqldb_uri = 'mysql+mysql://user:password@localhost:3309/adminer'
- engine = create_engine(msqldb_uri)
+#msqldb_uri = 'mysql+mysql://user:password@localhost:3309/adminer'
+#engine = create_engine(msqldb_uri)
  
 
 
