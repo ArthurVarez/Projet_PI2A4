@@ -1,11 +1,6 @@
 
-from flask import Flask, render_template,request,jsonify
-
-from flask_bootstrap import Bootstrap
-from flask_sqlalchemy import SQLAlchemy
-
 from sqlalchemy import create_engine, MetaData,Column,Integer,Table,select,String,DateTime
-from sqlalchemy.orm import sessionmaker
+
 
 metadata= MetaData()
 
@@ -18,7 +13,7 @@ ressources = Table(
 
 )
 
-reservation = Table(
+reservations = Table(
     'Reservation',
     metadata,
     Column('id',Integer, primary_key=True),

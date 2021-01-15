@@ -3,10 +3,10 @@ from flask import Flask, render_template,request,jsonify
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-from sqlalchemy import create_engine, MetaData,Column,Integer,Table,select,String,DateTime
-from sqlalchemy.orm import sessionmaker
-from config import ressources,reservation,ressource_reserve
+from sqlalchemy import create_engine,select
 
+from sqlalchemy.orm import sessionmaker
+from config import ressources,reservations,ressource_reserve
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -14,9 +14,6 @@ Bootstrap(app)
 
 engine = create_engine('mysql+pymysql://root:password@db/API_DB')
 Session = sessionmaker(bind=engine)
-
-
-#metadata.create_all(engine)
 
 
 
@@ -68,13 +65,37 @@ def Ressource_ID(id): #renvoie la ressource avec l'ID correspondant
 @app.route("/Reservation/",methods=["GET","POST"])
 def Reservation():
     if request.method=="GET": #Renvoie la liste des réservations
-        pass
+        query = select([reservations])
+        conn = engine.connect()
+        res = conn.execute(query)
+        result= []
+        for row in res:
+            result.append({
+            'id': row[0],
+            'nomUtilisateur':row[1],
+            'date_debut':row[2],
+            'date_fin':row[3]
+            }
+            )
+        result_dict = {'Reservations': result}
+        return jsonify(result_dict)
     elif request.method=="POST": #permet d'ajouter une Réservation (utilisateur)
         pass
 
-@app.route("/Reservation/<id>/", methods=["GET"])
-def Reservation_ID(): #renvoie la réservation avec l'ID correspondant
-    pass
+@app.route("/Reservation/<int:id>/", methods=["GET"])
+def Reservation_ID(id): #renvoie la réservation avec l'ID correspondant
+        query = select([reservations]).where(reservations.c.id==id)
+        conn = engine.connect()
+        res = conn.execute(query)
+        results=[]
+        for element in res:
+            results=list(element)
+        return jsonify(
+            id= results[0],
+            nomUtilisateur=results[1],
+            date_debut=results[2],
+            date_fin=results[3]
+        )
 
 
 @app.route("/RessourceReserve/", methods=["GET"])
