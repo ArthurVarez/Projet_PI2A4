@@ -1,10 +1,16 @@
 FROM python:latest
 
-RUN pip install flask
-RUN pip install flask_restplus
 
-ADD main.py .
+WORKDIR /app
 
-EXPOSE 80
+COPY requirement.txt /app
+RUN pip install -r requirement.txt 
 
-CMD ["python","main.py"]
+COPY . /app
+
+
+EXPOSE 5000
+
+
+CMD ["python","app.py","runserver","--host=0.0.0.0","--threaded"]
+

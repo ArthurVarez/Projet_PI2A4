@@ -1,0 +1,37 @@
+version: '3'
+services: 
+    db:
+        # This is the configution for the first service
+        image: "mysql:5.7"
+        # ici on pull l'image mysql du dockerhub
+        # restart: "always"
+        environment: 
+            MYSQL_ROOT_PASSWORD: "password"
+            MYSQL_DATABASE: "API_DB"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "password"
+        volumes:
+          - db_data:/var/lib/mysql
+            
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - "8081:8080"
+        depends_on: 
+            - db 
+
+    flaskapp:
+        build : ./app
+        ports:
+            - "5000:5000"
+        depends_on: 
+            - db 
+        
+
+
+
+    
+
+volumes:
+  db_data: {}
