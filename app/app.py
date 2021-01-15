@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask import request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
@@ -88,12 +88,10 @@ def Ressources():
         #ressources = Ressource()
         query = select([ressources])
         conn = engine.connect()
-        res = conn.execute(query)
-        chain = ""
-        for element in res:
-            chain = chain + str(element)
-        res.close()
-        return chain
+        result = conn.execute(query)
+        results = [list(row) for row in result]
+        results_dict = {'results': results}
+        return jsonify(results_dict)
     elif request.method=="POST": #permet d'ajouter une Ressources(il faudra verifier que l'utilisateur est admin)
         pass
 
