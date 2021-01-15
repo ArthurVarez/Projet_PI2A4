@@ -60,11 +60,18 @@ def Ressources():
         query = select([ressources])
         conn = engine.connect()
         res = conn.execute(query)
-        chain = ""
-        for element in res:
-            chain = chain + str(element)
-        res.close()
-        return chain
+        result= []
+        for row in res:
+            result.append({
+                'id':row[0],
+                'quantiteMemoire':row[1],
+                'quantiteGPU':row[2]
+            }
+            )
+        result_dict = {'Ressources': result}
+        return jsonify(result_dict)
+ 
+        
     elif request.method=="POST": #permet d'ajouter une Ressources(il faudra verifier que l'utilisateur est admin)
         pass
 
