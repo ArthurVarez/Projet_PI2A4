@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify
-from flask import request
+from flask import Flask, render_template,request,jsonify
+
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
+
 from sqlalchemy import create_engine, MetaData,Column,Integer,Table,select,String,DateTime
 from sqlalchemy.orm import sessionmaker
 
@@ -12,30 +13,6 @@ Bootstrap(app)
 engine = create_engine('mysql+pymysql://root:password@db/API_DB')
 Session = sessionmaker(bind=engine)
 metadata= MetaData()
-"""
-class Reservation(Base):
-    __tablename__ = 'Reservation'
-
-    id = Column(Integer, primary_key=True)
-    nomUtilisateur = Column(String(20))
-    date_debut = Column(DateTime)
-    date_fin = Column(DateTime)
-
-class Ressource(Base):
-    __tablename__ = 'Ressource'
-
-    id = Column(Integer, primary_key=True)
-    quantiteMemoire = Column(Integer)
-    quantiteGPU = Column(Integer)
-
-class RessourceReserve(Base):
-    __tablename__ = 'RessourceReserve'
-
-    idRessource = Column(Integer, primary_key=True)
-    idReservation = Column(Integer, primary_key=True)
-    nbGPU = Column(Integer)
-    nbmemoire = Column(Integer)
-    """
 
 #metadata.create_all(engine)
 
@@ -68,12 +45,6 @@ ressource_reserve = Table(
 )
 
 
-
-
-#msqldb_uri = 'mysql+mysql://user:password@localhost:3309/adminer'
-#engine = create_engine(msqldb_uri)
- 
-
 @app.route("/",methods=["GET"])
 
 def Hello():
@@ -88,16 +59,28 @@ def Ressources():
         #ressources = Ressource()
         query = select([ressources])
         conn = engine.connect()
-        result = conn.execute(query)
-        results = [list(row) for row in result]
-        results_dict = {'results': results}
-        return jsonify(results_dict)
+        res = conn.execute(query)
+        chain = ""
+        for element in res:
+            chain = chain + str(element)
+        res.close()
+        return chain
     elif request.method=="POST": #permet d'ajouter une Ressources(il faudra verifier que l'utilisateur est admin)
         pass
 
-@app.route("/Ressource/<id>/", methods=["GET"])
-def Ressource_ID(): #renvoie la ressource avec l'ID correspondant
-    pass
+@app.route("/Ressource/<int:id>/", methods=["GET"])
+def Ressource_ID(id): #renvoie la ressource avec l'ID correspondant
+    query = select([ressources]).where(ressources.c.id==id)
+    conn = engine.connect()
+    res = conn.execute(query)
+    results=[]
+    for element in res:
+        results=list(element)
+    return jsonify(
+        id= results[0],
+        quantiteMemoire=results[1],
+        quantiteGPU=results[2]
+    )
 
 
 @app.route("/Reservation/",methods=["GET","POST"])
