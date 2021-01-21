@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine,select,insert
 
 from sqlalchemy.orm import sessionmaker
-from config import ressources,reservations,ressource_reserve,metadata
+from config import *
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -52,7 +52,6 @@ def Ressources():
             query= ressources.insert(None).values(id=content["id"], quantiteGPU=content["quantiteGPU"],quantiteMemoire=content["quantiteMemoire"])
             conn = engine.connect()
             res = conn.execute(query)
-            
             return str(content["id"])
         
 
@@ -89,7 +88,11 @@ def Reservation():
         result_dict = {'Reservations': result}
         return jsonify(result_dict)
     elif request.method=="POST": #permet d'ajouter une Réservation (utilisateur)
-        pass
+        content = request.json
+        query= ressources.insert(None).values(id=content["id"], quantiteGPU=content["quantiteGPU"],quantiteMemoire=content["quantiteMemoire"])
+        conn = engine.connect()
+        res = conn.execute(query)
+        
 
 @app.route("/Reservation/<int:id>/", methods=["GET"])
 def Reservation_ID(id): #renvoie la réservation avec l'ID correspondant
