@@ -3,10 +3,10 @@ from flask import Flask, render_template,request,jsonify
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-from sqlalchemy import create_engine,select
+from sqlalchemy import create_engine,select,insert
 
 from sqlalchemy.orm import sessionmaker
-from config import ressources,reservations,ressource_reserve
+from config import ressources,reservations,ressource_reserve,metadata
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -41,11 +41,20 @@ def Ressources():
             }
             )
         result_dict = {'Ressources': result}
-        return jsonify(result_dict)
- 
-        
+        return jsonify(result_dict)    
     elif request.method=="POST": #permet d'ajouter une Ressources(il faudra verifier que l'utilisateur est admin)
-        pass
+        if not request.json:
+            return 'nojson'
+        if not request.json or not 'id'in request.json or not 'quantiteMemoire' in request.json or not 'quantiteGPU' in request.json:
+            return "400"
+        else:
+            content = request.json
+            query= ressources.insert(None).values(id=content["id"], quantiteGPU=content["quantiteGPU"],quantiteMemoire=content["quantiteMemoire"])
+            conn = engine.connect()
+            res = conn.execute(query)
+            
+            return str(content["id"])
+        
 
 @app.route("/Ressource/<int:id>/", methods=["GET"])
 def Ressource_ID(id): #renvoie la ressource avec l'ID correspondant
