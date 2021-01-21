@@ -13,11 +13,6 @@ INSERT INTO Reservation(id, nomUtilisateur,date_debut,date_fin)
  (1,'Remi','2020-02-07 13:00:00','2020-02-07 17:00:00'),
  (2,'Arthur','2020-02-07 15:00:00','2020-02-07 17:00:00');
 
-INSERT INTO Reservation(id, nomUtilisateur,date_debut,date_fin)
- VALUES
- (1,'Remi','2020-02-07 13:00:00','2020-02-07 17:00:00'),
- (2,'Arthur','2020-02-07 15:00:00','2020-02-07 17:00:00');
-
 
 INSERT INTO RessourceReserve(idRessource, idReservation,nbGPU,nbmemoire)
  VALUES
