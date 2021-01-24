@@ -12,6 +12,7 @@ services:
             MYSQL_PASSWORD: "password"
         volumes:
           - db_data:/var/lib/mysql
+          - ./modeleBDD/:/docker-entrypoint-initdb.d
             
     adminer:
         image: adminer
@@ -27,11 +28,6 @@ services:
             - "5000:5000"
         depends_on: 
             - db 
-        
-
-
-
-    
-
+            
 volumes:
   db_data: {}
