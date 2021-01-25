@@ -12,11 +12,11 @@ Durant notre 4ème année a l'ESILV nous avons eu a realiser un projet combinant
 -JWT
 -SQL
 
-##Fonctionnement
+## Fonctionnement
 
 Grace à docker, le projet est deployable sur n'importe lequel appareil, juste en ayant docker installé. En effet une image python est crée via un dockerfile et un docker-compose file permet l'interaction entre cette meme image, un image MySQL et une image adminer. En donnant precisant des scripts dans le docker compose, les tables de notre bdd sont autmomatiquement crées et remplies. 
 
-##L'API
+## L'API
 
 
 
