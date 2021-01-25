@@ -44,9 +44,11 @@ _GET /RessourceReserve_: return all Reserved Ressource
 
 ## Base de donnees:
 
-![alt text](https://github.com/ArthurVarez/Projet_PI2A4/blob/master/modeleBDD/BDDV1.png)
-
 La table ressource a pour but de lister les ressource matériel (différente machine par exemples)
 La table réservation permet de gerer les créneaux de reservation demandée par les utilisateurs tandis que la table ressource réservée permet de lister les attributions de ressource et quantité de celle-ci dédié a chaque réservation. 
+
+![alt text](https://github.com/ArthurVarez/Projet_PI2A4/blob/master/modeleBDD/BDDV1.png)
+
+
 
 
