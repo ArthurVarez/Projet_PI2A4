@@ -28,7 +28,7 @@ POST /Ressource: create a Ressource exemple of the json to post
 
 exemple: { "id": 16, "quantiteMemoire": 12, "quantiteGPU": 15 } id value must be unique or ressource will not be add in database
 
-GET /Ressource/int:id: return the Ressource with the id value 
+<u>GET /Ressource/int:id </u>: return the Ressource with the id value 
 
 exemple: GET /Ressource/5 return { "id": 5, "quantiteGPU": 12, "quantiteMemoire": 8 }
 
