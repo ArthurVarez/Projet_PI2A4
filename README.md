@@ -42,5 +42,8 @@ return: { "date_debut": "Fri, 07 Feb 2020 13:00:00 GMT", "date_fin": "Fri, 07 Fe
 _GET /RessourceReserve_: return all Reserved Ressource
 
 
+## Base de donnees:
+
+![alt text](https://github.com/ArthurVarez/Projet_PI2A4/blob/master/modeleBDD/BDDV1.png)
 
 
