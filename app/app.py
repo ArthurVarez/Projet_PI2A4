@@ -18,9 +18,7 @@ Session = sessionmaker(bind=engine)
 
 
 @app.route("/",methods=["GET"])
-
 def Hello():
-    
     return render_template('welcome.html')
 
 
@@ -86,8 +84,15 @@ def Reservation():
             })
         result_dict = {'Reservations': result}
         return jsonify(result_dict)
-    elif request.method=="POST": #permet d'ajouter une Réservation (utilisateur)
-        pass
+    elif request.method=="POST": #permet d'ajouter une Réservation (utilisateur)    
+        if not request.json or not 'date_debut'in request.json or not 'date_fin' in request.json:
+            return "invalid request"
+        else:
+            content = request.json
+            query= reservations.insert(None).values(nomUtilisateur= "", date_debut = content["date_debut"],date_fin =content["date_fin"])
+            conn = engine.connect()
+            res = conn.execute(query)
+            return "200"
         
 
 @app.route("/Reservation/<int:id>/", methods=["GET"])

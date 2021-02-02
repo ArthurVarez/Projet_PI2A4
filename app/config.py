@@ -16,7 +16,7 @@ ressources = Table(
 reservations = Table(
     'Reservation',
     metadata,
-    Column('id',Integer, primary_key=True),
+    Column('id',Integer, primary_key=True, autoincrement=True),
     Column("nomUtilisateur",String),
     Column("date_debut",DateTime),
     Column("date_fin",DateTime)
