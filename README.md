@@ -41,8 +41,11 @@ _POST /Reservation_: create a reservation
 exemple: 
 
 { 
-  "date_debut": "2020-02-07 17:00:00", 
+
+  "date_debut": "2020-02-07 17:00:00",
+  
   "date_fin": "2020-02-09 23:00:00" 
+  
 }
 
 
