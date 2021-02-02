@@ -18,9 +18,7 @@ Session = sessionmaker(bind=engine)
 
 
 @app.route("/",methods=["GET"])
-
 def Hello():
-    
     return render_template('welcome.html')
 
 
