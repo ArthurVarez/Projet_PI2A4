@@ -111,21 +111,27 @@ def Reservation_ID(id): #renvoie la réservation avec l'ID correspondant
         )
 
 
-@app.route("/RessourceReserve/", methods=["GET"])
+@app.route("/RessourceReserve/", methods=["GET","POST"])
 def RessourceReserve(): #retourne la liste de toutes les ressouces réservé de tout les temps(admin?)
-    query = select([ressource_reserve])
-    conn = engine.connect()
-    res = conn.execute(query)
-    result= []
-    for row in res:
-        result.append({
-            'idRessource':row[0],
-            'idReservation':row[1],
-            'nbGPU':row[2],
-            'nbmemoire':row[3]
-        })
-    result_dict = {'RessourceReserve': result}
-    return jsonify(result_dict)
+    if request.method=="GET":
+        query = select([ressource_reserve])
+        conn = engine.connect()
+        res = conn.execute(query)
+        result= []
+        for row in res:
+            result.append({
+                'idRessource':row[0],
+                'idReservation':row[1],
+                'nbGPU':row[2],
+                'nbmemoire':row[3]
+            })
+        result_dict = {'RessourceReserve': result}
+        return jsonify(result_dict)
+    elif request.method=="POST":
+        if not request.json or not 'date_debut'in request.json or not 'date_fin' in request.json:
+            return "invalid request"
+        else:
+            pass
     
 
 @app.route("/RessourceReserve/idRessource/<int:id>", methods=["GET"])
