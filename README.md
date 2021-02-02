@@ -37,7 +37,8 @@ _GET /Reservation_: return all Reservation
 exemple: { "Reservations": [ { "date_debut": "Fri, 07 Feb 2020 13:00:00 GMT", "date_fin": "Fri, 07 Feb 2020 17:00:00 GMT", "id": 1, "nomUtilisateur": "Remi" }, { "date_debut": "Fri, 07 Feb 2020 15:00:00 GMT", "date_fin": "Fri, 07 Feb 2020 17:00:00 GMT", "id": 2, "nomUtilisateur": "Arthur" } ] }
 
 _GET /Reservation/int:id_ return the Reservation with this id value exemple: GET /Reservation/1 
-return: { "date_debut": "Fri, 07 Feb 2020 13:00:00 GMT", "date_fin": "Fri, 07 Feb 2020 17:00:00 GMT", "id": 1, "nomUtilisateur": "Remi" }
+return:  \
+{ "date_debut": "Fri, 07 Feb 2020 13:00:00 GMT", "date_fin": "Fri, 07 Feb 2020 17:00:00 GMT", "id": 1, "nomUtilisateur": "Remi" }
 
 _GET /RessourceReserve_: return all Reserved Ressource
 
