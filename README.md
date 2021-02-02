@@ -22,7 +22,7 @@ endpoints:
 
 _GET /Ressource_ : return all ressources 
 
-exemple: { "Ressources": [ { "id": 1, "quantiteGPU": 12, "quantiteMemoire": 16 }, { "id": 2, "quantiteGPU": 24, "quantiteMemoire": 16 }, { "id": 3, "quantiteGPU": 6, "quantiteMemoire": 8 } ] }
+exemple:  { "Ressources": [ { "id": 1, "quantiteGPU": 12, "quantiteMemoire": 16 }, { "id": 2, "quantiteGPU": 24, "quantiteMemoire": 16 }, { "id": 3, "quantiteGPU": 6, "quantiteMemoire": 8 } ] }
 
 _POST /Ressource_: create a Ressource exemple of the json to post
 
