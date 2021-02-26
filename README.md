@@ -35,6 +35,19 @@ exemple: GET /Ressource/5 return { "id": 5, "quantiteGPU": 12, "quantiteMemoire"
 _GET /Reservation_: return all Reservation  
 exemple: { "Reservations": [ { "date_debut": "Fri, 07 Feb 2020 13:00:00 GMT", "date_fin": "Fri, 07 Feb 2020 17:00:00 GMT", "id": 1, "nomUtilisateur": "Remi" }, { "date_debut": "Fri, 07 Feb 2020 15:00:00 GMT", "date_fin": "Fri, 07 Feb 2020 17:00:00 GMT", "id": 2, "nomUtilisateur": "Arthur" } ] }
 
+_POST /Reservation_: create a reservation
+
+exemple: 
+
+{ 
+
+  "date_debut": "2020-02-07 17:00:00",
+  
+  "date_fin": "2020-02-09 23:00:00" 
+  
+}
+
+
 _GET /Reservation/int:id_ return the Reservation with this id value exemple: GET /Reservation/1 
 return:  \
 { "date_debut": "Fri, 07 Feb 2020 13:00:00 GMT", "date_fin": "Fri, 07 Feb 2020 17:00:00 GMT", "id": 1, "nomUtilisateur": "Remi" }

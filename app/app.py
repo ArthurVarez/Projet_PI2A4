@@ -84,8 +84,15 @@ def Reservation():
             })
         result_dict = {'Reservations': result}
         return jsonify(result_dict)
-    elif request.method=="POST": #permet d'ajouter une Réservation (utilisateur)
-        pass
+    elif request.method=="POST": #permet d'ajouter une Réservation (utilisateur)    
+        if not request.json or not 'date_debut'in request.json or not 'date_fin' in request.json:
+            return "invalid request"
+        else:
+            content = request.json
+            query= reservations.insert(None).values(nomUtilisateur= "", date_debut = content["date_debut"],date_fin =content["date_fin"])
+            conn = engine.connect()
+            res = conn.execute(query)
+            return "200"
         
 
 @app.route("/Reservation/<int:id>/", methods=["GET"])
@@ -104,21 +111,27 @@ def Reservation_ID(id): #renvoie la réservation avec l'ID correspondant
         )
 
 
-@app.route("/RessourceReserve/", methods=["GET"])
+@app.route("/RessourceReserve/", methods=["GET","POST"])
 def RessourceReserve(): #retourne la liste de toutes les ressouces réservé de tout les temps(admin?)
-    query = select([ressource_reserve])
-    conn = engine.connect()
-    res = conn.execute(query)
-    result= []
-    for row in res:
-        result.append({
-            'idRessource':row[0],
-            'idReservation':row[1],
-            'nbGPU':row[2],
-            'nbmemoire':row[3]
-        })
-    result_dict = {'RessourceReserve': result}
-    return jsonify(result_dict)
+    if request.method=="GET":
+        query = select([ressource_reserve])
+        conn = engine.connect()
+        res = conn.execute(query)
+        result= []
+        for row in res:
+            result.append({
+                'idRessource':row[0],
+                'idReservation':row[1],
+                'nbGPU':row[2],
+                'nbmemoire':row[3]
+            })
+        result_dict = {'RessourceReserve': result}
+        return jsonify(result_dict)
+    elif request.method=="POST":
+        if not request.json or not 'date_debut'in request.json or not 'date_fin' in request.json:
+            return "invalid request"
+        else:
+            pass
     
 
 @app.route("/RessourceReserve/idRessource/<int:id>", methods=["GET"])
