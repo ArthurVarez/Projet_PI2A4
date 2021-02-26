@@ -3,7 +3,7 @@ from flask import Flask, render_template,request,jsonify
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-from sqlalchemy import create_engine,select,insert
+from sqlalchemy import create_engine,select,insert, between
 
 from sqlalchemy.orm import sessionmaker
 from config import *
@@ -128,10 +128,56 @@ def RessourceReserve(): #retourne la liste de toutes les ressouces réservé de 
         result_dict = {'RessourceReserve': result}
         return jsonify(result_dict)
     elif request.method=="POST":
-        if not request.json or not 'date_debut'in request.json or not 'date_fin' in request.json:
-            return "invalid request"
+        if not request.json or not 'idReservation'in request.json or not 'idRessource' in request.json or not 'nbGPU' in request.json or not 'nbMemoire' in request.json:
+            return "invalid json data" #on vérifie que les élément du json existe
         else:
-            pass
+            content=request.json
+            query = select([ressource_reserve]).where(ressources.c.id==content['idRessource'])
+            conn = engine.connect()
+            res = conn.execute(query)
+            ressourceExiste=False
+            globalGPUValid = False
+            globalmemoryValid = False
+             #on verifie que la Ressource existe et que les demandes GPU et mémoire ne sont pas supérieur au quantité de la ressource            
+            quantiteGPU=0
+            quantiteMemoire=0
+            for row in res:
+                ressourceExiste=True
+                quantiteGPU = row[2]
+                quantiteMemoire= row[3]
+            if content["nbGPU"]<quantiteGPU:
+                globalGPUValid=True
+            if content["nbGPU"]<quantiteMemoire:
+                globalmemoryValid = True
+            query = select([reservations]).where(reservations.c.id==content['idReservation'])
+            conn = engine.connect()
+            res = conn.execute(query)
+            reservationExiste=False
+            currentReservation={}
+            #on verifie que la Reservation existe          
+            for row in res:
+                reservationExiste=True
+                currentReservation={
+                    'id': row[0],
+                    'nomUtilisateur':row[1],
+                    'date_debut':row[2],
+                    'date_fin':row[3]
+                }
+            if globalGPUValid and globalmemoryValid and ressourceExiste and reservationExiste:
+                query = select([ressource_reserve, reservations]).where(reservations.c.id == ressource_reserve.c.idReservation 
+                    and ressource_reserve.c.idReservation== currentReservation["id"] 
+                    and (between(reservations.c.date_debut,currentReservation["date_debut"],currentReservation["date_fin"])
+                        or between(reservations.c.date_fin,currentReservation["date_debut"],currentReservation["date_fin"])
+                        or between(currentReservation["date_debut"],reservations.c.date_debut,reservations.c.date_fin)
+                    )
+                )
+                conn = engine.connect()
+                res = conn.execute(query)
+                tabdate=[currentReservation['date_debut'], currentReservation['date_fin']]
+                tabGPU=[content["nbGPU"]]
+                for row in res:
+                    
+                return str(res)
     
 
 @app.route("/RessourceReserve/idRessource/<int:id>", methods=["GET"])
