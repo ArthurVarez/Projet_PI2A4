@@ -205,6 +205,8 @@ def RessourceReserve(): #retourne la liste de toutes les ressouces réservé de 
                 conn = engine.connect()
                 res = conn.execute(query)
                 return "200"
+            else:
+                return "invalid request"
 
                                 
 
