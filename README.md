@@ -54,6 +54,16 @@ return: { "date_debut": "Fri, 07 Feb 2020 13:00:00 GMT", "date_fin": "Fri, 07 Fe
 
 _GET /RessourceReserve_: return all Reserved Ressource
 
+_POST /RessourceReserve_: Create a RessourceReservation
+exemple: 
+
+{
+    "idReservation": 1, 
+    "idRessource": 7, 
+    "nbGPU": 7, 
+    "nbMemoire": 3
+}
+
 
 ## Base de donnees:
 
