@@ -54,6 +54,16 @@ return:  \
 
 _GET /RessourceReserve_: return all Reserved Ressource
 
+_POST /RessourceReserve_: Create a RessourceReservation
+exemple: 
+
+{
+    "idReservation": 1, 
+    "idRessource": 7, 
+    "nbGPU": 7, 
+    "nbMemoire": 3
+}
+
 
 ## Base de donnees:
 
