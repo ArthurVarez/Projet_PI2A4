@@ -1,0 +1,197 @@
+
+<html lang="r"> 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PI2A4</title> 
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+  	
+  	
+  </head>
+ 
+  <body> 
+	<div id="app"  style="background-image: url('https://defense-92.fr/wp-content/uploads/2017/06/DSC_9179.jpg');">
+		<div class="row">
+		<img style="width:150;height:150" src="https://www.esilv.fr/ecole-ingenieur/logos/logo_esilv_png_couleur.png">
+		<div class="container" style="width:600;height:140;text-align:center;border-style:solid;border-color:white;border-radius:25px;margin-top:10px;margin-left:280px">		
+		<div class="display-1" style="color:white">{{titre}}</div> 
+		</div>
+		<img style="width:150;height:150;margin-right:15px" src="https://www.devinci.fr/wordpress/wp-content/uploads/2020/09/logo-pole-leonard-vinci-n-500-1.png">
+		</div>
+		<br>
+    	<div class="container" style="background-color:white;border-radius:5px;">
+    		<br>
+            <div class="jumbotron">
+			<h1 class="display-4"><strong>{{sousTitre1}}</strong></h1>
+			<hr>
+			<div class="row align-items-start">
+				<p> &nbsp &nbsp {{choixID1}} <input type="text" v-model="id2" placeholder="ID"/> &nbsp &nbsp &nbsp</p>
+				<button type="button" class="btn btn-dark btn-sm" v-on:click="getRessources()"> DISPLAY RESSOURCES </button>
+				<p> &nbsp &nbsp &nbsp</p>
+				<button type="button" class="btn btn-outline-dark btn-sm" v-on:click="suppRessources()"> HIDE </button>
+			</div>
+			
+			<table class="table table-striped" align="center" border=3 rules="all">
+				<thead class="table-dark">
+					<tr align="center">
+						<th v-for="header in headers1">{{header}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for ="ressource in lesRessources">
+						<td align="center">{{ ressource.id }}</td>
+						<td align="center">{{ ressource.quantiteGPU }}</td>
+						<td align="center">{{ ressource.quantiteMemoire }}</td>
+					</tr>
+				</tbody>
+			</table>
+	
+            <br>
+			<h4> &nbsp{{sousTitre2}} :</h4>
+            <div class="row align-items-start">
+            	&nbsp &nbsp &nbsp
+                <input type="text" v-model="id" placeholder="ID" style="height:40"/> &nbsp &nbsp 
+                <h6 class="alert alert-danger" style="color:red;width:320;height:40">{{warning1}}</h6>&nbsp &nbsp 
+                <input type="text" v-model="quantiteGPU" placeholder="GPU" style="height:40"/> &nbsp &nbsp 
+                <input type="text" v-model="quantiteMemoire" placeholder="Memory" style="height:40"/> &nbsp &nbsp 
+                <button type="button" class="btn btn-dark btn-sm" v-on:click="addRessource()" style="height:40"> ADD RESSOURCE </button>
+                &nbsp &nbsp
+            </div>
+            </div>
+            
+            <br>
+            
+            <div class="jumbotron">
+            <h1 class="display-4"><strong>{{sousTitre3}}</strong></h1>
+            <hr>
+			<div class="row align-items-start">
+				<p> &nbsp &nbsp {{choixID2}}<input type="text" v-model="id3" placeholder="ID"/> &nbsp &nbsp &nbsp</p>
+				<button  type="button" class="btn btn-dark btn-sm" v-on:click="getReservations()"> DISPLAY RESERVATIONS </button>
+				<p> &nbsp &nbsp &nbsp</p>
+				<button type="button" class="btn btn-outline-dark btn-sm" v-on:click="suppReservations()"> HIDE </button>
+			</div>
+			<table class="table table-striped" align="center" border=3 rules="all">
+				<thead class="table-dark">
+					<tr align="center">
+						<th style="width:10%">{{headers2[0]}}</th>
+						<th style="width:30%">{{headers2[1]}}</th>
+						<th style="width:30%">{{headers2[2]}}</th>
+						<th style="width:20%">{{headers2[3]}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for ="reservation in lesReservations">
+						<td align="center">{{ reservation.id }}</td>
+						<td align="center">{{ reservation.date_debut }}</td>
+						<td align="center">{{ reservation.date_fin }}</td>
+						<td align="center">{{ reservation.nomUtilisateur }}</td>
+					</tr>
+				</tbody>
+			</table>  
+			
+			<br>      
+            
+            <div class="row">
+            	<h4>&nbsp&nbsp&nbsp{{sousTitre4}} :&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h4>
+            	<div class="col; border; rounded" style="border-style:solid;border-color:black">
+            	<br> 
+            	&nbsp Beginning : &nbsp &nbsp
+                	<select v-model="jour2"> 
+                		<option value="" disabled="disabled" selected data-default>JJ</option>
+	                	<option v-for="i in lesJours" v-model="jour2">{{ i }}</option>
+                	</select>
+                	<select v-model="mois">
+                		<option value="" disabled="disabled" selected data-default>MM</option>
+	                	<option v-for="i in lesMois">{{ i }}</option>
+                	</select>
+                	<select v-model="annee">
+                		<option value="" disabled="disabled" selected data-default>AA</option>
+	                	<option v-for="i in lesAnnees">{{ i }}</option>
+                	</select>
+                	<select v-model="heure">
+                		<option value="" disabled="disabled" selected data-default>h</option>
+	                	<option v-for="i in lesHeures">{{ i }}</option>
+                	</select> &nbsp &nbsp
+                <br>
+                <br>
+                &nbsp Ending :&nbsp &nbsp &nbsp &nbsp &nbsp
+                	<select v-model="fjour2"> 
+                		<option value="" disabled="disabled" selected data-default>JJ</option>
+	                	<option v-for="i in lesJours" v-model="jour2">{{ i }}</option>
+                	</select>
+                	<select v-model="fmois">
+                		<option value="" disabled="disabled" selected data-default>MM</option>
+	                	<option v-for="i in lesMois">{{ i }}</option>
+                	</select>
+                	<select  v-model="fannee">
+                		<option value="" disabled="disabled" selected data-default>AA</option>
+	                	<option v-for="i in lesAnnees">{{ i }}</option>
+                	</select>
+                	<select v-model="fheure">
+                		<option value="" disabled="disabled" selected data-default>h</option>
+	                	<option v-for="i in lesHeures">{{ i }}</option>
+                	</select> &nbsp &nbsp
+                <br>
+                <br>
+                &nbsp User Name : &nbsp <input type="text" size="22" v-model="nomUtilisateur" placeholder="User Name"/> &nbsp &nbsp
+                <br> &nbsp
+                </div>
+                &nbsp &nbsp
+                <button type="button" class="btn btn-dark btn-sm" v-on:click="addReservation()"> ADD RESERVATION </button>
+            </div>
+            </div>
+                        
+            <br>
+            
+            <div class="jumbotron">
+            <h1 class="display-4"><strong>{{sousTitre5}}</strong></h1>
+            <hr>
+			<div class="row align-items-start">
+				&nbsp &nbsp 
+				<button type="button" class="btn btn-dark btn-sm" v-on:click="getRessourcesReserve()">DISPLAY RESERVED RESSOURCE</button> &nbsp &nbsp &nbsp
+				<button type="button" class="btn btn-outline-dark btn-sm" v-on:click="suppRessourcesReserve()"> HIDE </button>
+			</div>
+			
+			<br>
+			
+			<table class="table table-striped" align="center" border=3 rules="all">
+				<thead class="table-dark">
+					<tr align="center">
+						<th v-for="header in headers3">{{header}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for ="ressource in lesRessourcesReserve">
+						<td align="center">{{ ressource.idReservation }}</td>
+						<td align="center">{{ ressource.idRessource }}</td>
+						<td align="center">{{ ressource.nbGPU }}</td>
+						<td align="center">{{ ressource.nbmemoire }}</td>
+					</tr>
+				</tbody>
+			</table>
+			
+            <br>
+            
+            <h4>{{sousTitre6}} : </h1>
+            <div class="row align-items-start">
+                &nbsp &nbsp &nbsp<input type="text" v-model="idReservation" style="width:140;height:40" placeholder="Reservation's ID"/> &nbsp &nbsp               
+                <h6 class="alert alert-danger" style="color:red;width:400;height:40">{{warning2}}</h6>&nbsp &nbsp 
+                <input type="text" v-model="idRessource" style="width:140;height:40" placeholder="Ressource's ID"/> &nbsp &nbsp
+                <input type="text" v-model="nbGPU" style="width:60;height:40" placeholder="GPU"/>&nbsp &nbsp 
+                <input type="text" v-model="nbMemoire" style="width:80;height:40" placeholder="Memory"/> &nbsp &nbsp
+                <br> &nbsp
+                <button type="button" class="btn btn-dark btn-sm" style="width:170;height:40" v-on:click="addRessourceReserve()"> RESERVE RESSOURCE </button>
+            </div>
+            </div>
+            <br>
+        </div>
+        </div> 	
+        
+        <script src="https://unpkg.com/vue@3.0.5"></script>
+  		<script src="/Users/bartvermeulen/Desktop/PROJET_PI2A4/app.js"></script>	
+  </body>
+</html>
